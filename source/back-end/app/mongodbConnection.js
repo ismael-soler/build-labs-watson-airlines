@@ -65,7 +65,6 @@ const create_connection = async () => {
         // Return connection
         return db;
     } catch (e) {
-        console.log('error!')
         return e.status;
     }
 }
