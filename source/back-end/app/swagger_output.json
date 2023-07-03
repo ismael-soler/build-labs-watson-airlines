@@ -130,37 +130,116 @@
         }
       }
     },
+    "/flight/find/{origin}/{destination}": {
+      "get": {
+        "tags": [
+          "Flight"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flights successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/airport/": {
-        "get": {
-          "tags": [
-            "Airport"
-          ],
-          "description": "",
-          "responses": {
-            "200": {
-              "description": "Airport successfully obtained.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
+      "get": {
+        "tags": [
+          "Airport"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Airports successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "array"
+                    },
                     "items": {
                       "$ref": "#/components/schemas/Airport"
                     }
+                  },
+                  "xml": {
+                    "name": "main"
                   }
-                },
-                "application/xml": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Airport"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "array"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/Airport"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
                   }
                 }
               }
-            },
-            "500": {
-              "description": "Internal Server Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         }
-      },
+      }
+    },
     "/airport/id/{id}": {
       "get": {
         "tags": [
@@ -174,7 +253,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "ID of the airport"
           }
         ],
         "responses": {
@@ -194,7 +274,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -212,7 +304,83 @@
             "required": true,
             "schema": {
               "type": "string"
+            },
+            "description": "State code (e.g., NY, CA)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Airports successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "array"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/Airport"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "array"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/Airport"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
             }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/airport/iata/{iataCode}": {
+      "get": {
+        "tags": [
+          "Airport"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "iataCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IATA code of the airport"
           }
         ],
         "responses": {
@@ -221,10 +389,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/components/schemas/Airport"
-                  }
+                  "$ref": "#/components/schemas/Airport"
                 }
               },
               "application/xml": {
@@ -235,42 +400,51 @@
             }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/airline/": {
-        "get": {
-          "tags": [
-            "Airline"
-          ],
-          "description": "",
-          "responses": {
-            "200": {
-              "description": "Airline successfully obtained.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Airline"
-                    }
-                  }
-                },
-                "application/xml": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Airline"
-                  }
+      "get": {
+        "tags": [
+          "Airline"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Airline successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
                 }
               }
-            },
-            "500": {
-              "description": "Internal Server Error"
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
     "/airline/id/{id}": {
       "get": {
         "tags": [
