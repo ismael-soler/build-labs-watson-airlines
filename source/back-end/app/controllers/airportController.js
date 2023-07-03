@@ -43,4 +43,19 @@ exports.getAirportsByState = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+exports.getAirportByIataCode = async (req, res) => {
+    /* #swagger.responses[200] = {
+            description: 'Airport successfully obtained.',
+            schema: { $ref: '#/components/schemas/Airport' }
+        }
+       #swagger.tags = ['Airport']
+    */
+    try {
+        const airport = await Airport.findOne({ IATA_CODE: req.params.iataCode });
+        res.status(200).json(airport);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }
