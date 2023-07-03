@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const flightSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true,
-    unique: true
-  },
   AIRLINE: {
     type: String,
     required: true

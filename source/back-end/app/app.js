@@ -6,27 +6,27 @@ const mongo = require('./mongodbConnection');
 // routers
 const FlightRouter = require('./routes/flightRouter');
 const AirportRouter = require('./routes/airportRouter');
+const AirlineRouter = require('./routes/airlineRouter');
+//swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerSpec = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Watson Airlines Customer Experience",
+            version: "1.0.0",
+        },
+        servers: [
+            {
+                url: "http://localhost:3000"
+            }
+        ]
+    },
+    apis: [`${path.join(__dirname, "./routes/*.js")}`]
+};
 
 
-// swagger
-//const swaggerUI = require('swagger-ui-express');
-//const swaggerJsDoc = require('swagger-jsdoc');
-//const swaggerSpec = {
-//    definition: {
-//        openapi: "3.0.0",
-//        info: {
-//            title: "Node MongoDB API",
-//            version: "1.0.0",
-//        },
-//        servers: [
-//            {
-//                //url: "https://watson-airlines-api-mvp.146zmxftsk49.us-south.codeengine.appdomain.cloud/"
-//                url: "http://localhost:3000"
-//            }
-//        ]
-//    },
-//    apis: [`${path.join(__dirname, './routes/*.js')}`]
-//}
 
 
 async function main() {
@@ -43,7 +43,6 @@ async function main() {
         console.log(err);
         process.exit();
     });
-
 }
 
 
@@ -56,8 +55,8 @@ function startServer() {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-    // Swagger UI
-    //app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
+    // Swagger
+    app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
     // routes
     app.get('/', (req, res) => {
@@ -65,9 +64,10 @@ function startServer() {
     });
     app.use('/flight', FlightRouter);
     app.use('/airport', AirportRouter);
+    app.use('/airline', AirlineRouter);
 
     app.listen(port, () => {
-        console.log('Server started on port 3000');
+        console.log('Server started on port: ', port);
     });
 
 };

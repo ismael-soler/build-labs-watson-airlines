@@ -1,8 +1,11 @@
 const Flight = require('../models/flightModel');
 const Flights = require('../models/flightModel');
 
-// Retrieve all flights
 exports.getAllFlights = async (req, res) => {
+    /* #swagger.responses[200] = {
+            description: 'Flight successfully obtained.',
+            schema: { $ref: '#/components/schemas/Flight' }
+    } */
   try {
     const flights = await Flights.find();
     res.status(200).json(flights);
@@ -11,8 +14,12 @@ exports.getAllFlights = async (req, res) => {
   }
 };
 
-// Find a single Flight by id
+
 exports.getFlightById = async (req, res) => {
+    /* #swagger.responses[200] = {
+            description: 'Flight successfully obtained.',
+            schema: { $ref: '#/components/schemas/Flight' }
+    } */
   try {
     const flight = await Flight.findById(req.params.id);
     res.status(200).json(flight);
@@ -21,8 +28,17 @@ exports.getFlightById = async (req, res) => {
   }
 };
 
-// Find a single Flight by flight number
+/**
+ * Sample Controller
+ * @param {JSON} req request information
+ * @param {JSON} res response information
+ * @returns {JSON} return description
+ */
 exports.getFlightByNumber = async (req, res) => {
+    /* #swagger.responses[200] = {
+            description: 'Flight successfully obtained.',
+            schema: { $ref: '#/components/schemas/Flight' }
+    } */
     try {
         const flightNumber = req.params.flightNumber;
         const flight = await Flights.findOne({ FLIGHT_NUMBER: flightNumber });
@@ -32,8 +48,12 @@ exports.getFlightByNumber = async (req, res) => {
     }
 }
 
-// Retrieve the first flight
+
 exports.getFirstFlight = async (req, res) => {
+    /* #swagger.responses[200] = {
+            description: 'Flight successfully obtained.',
+            schema: { $ref: '#/components/schemas/Flight' }
+    } */
   try {
     const flight = await Flights.findOne();
     res.json(flight);

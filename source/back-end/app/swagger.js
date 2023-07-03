@@ -1,53 +1,29 @@
 const swagger_autogen = require('swagger-autogen')({ openapi: '3.0.0' });
 
+// schemas
 const mongo_specs = {
   Flight: {
-    type: 'object',
-    tags: ['Flight'],
-    properties: {
-      AIRLINE: {
-        type: 'string'
-      },
-      FLIGHT_NUMBER: {
-        type: 'number'
-      },
-      ORIGIN_AIRPORT: {
-        type: 'string'
-      },
-      DESTINATION_AIRPORT: {
-        type: 'string'
-      },
-      CANCELLED: {
-        type: 'boolean'
-      },
-      DEPARTURE_DATE: {
-        type: 'date'
-      },
-      ARRIVAL_DATE: {
-        type: 'date'
-      }
-    }
+    _id: '63e53b3d123da255099f26bc',
+    AIRLINE: 'US',
+    FLIGHT_NUMBER: 840,
+    ORIGIN_AIRPORT: 'SFO',
+    DESTINATION_AIRPORT: 'CLT',
+    CANCELLED: true,
+    DEPARTURE_DATE: '2023-01-01T03:20:00.000Z',
+    ARRIVAL_DATE: '2023-01-01T11:06:00.000Z'
   },
-  AIRPORT: {
-    tags: ['Airport'],
-    type: 'object',
-    properties: {
-      IATA_CODE: {
-        type: 'string'
-      },
-      AIRPORT: {
-        type: 'string'
-      },
-      CITY: {
-        type: 'string'
-      },
-      STATE: {
-        type: 'string'
-      },
-      COUNTRY: {
-        type: 'string'
-      }
-    }
+  Airport: {
+    _id: '63dd87f9fd4b3618756969ce',
+    IATA_CODE: 'AMA',
+    AIRPORT: 'Rick Husband Amarillo International Airport',
+    CITY: 'Amarillo',
+    STATE: 'TX',
+    COUNTRY: 'USA'
+  },
+  Airline: {
+    _id: '63dd87e1fd4b3618756969b3',
+    IATA_CODE: 'US',
+    AIRLINE: 'US Airways Inc.'
   }
 };
 
@@ -62,12 +38,12 @@ const general_specs = {
     version: '1.0.0'
   },
   servers: [
-    //{
+    // {
     //  url: 'http://localhost:3000',
     //  description: 'Local server'
-    //},
+    // },
     {
-      url: 'https://watson-airlines-api-mvp.146zmxftsk49.us-south.codeengine.appdomain.cloud',
+      url: 'https://watson-airport-swagger-test.146zmxftsk49.us-south.codeengine.appdomain.cloud',
       description: 'Watson API'
     }
   ],
@@ -77,7 +53,7 @@ const general_specs = {
   security: [],
   components: {
     schemas: mongo_specs
-  },
+  }
 };
 
 // API Routes

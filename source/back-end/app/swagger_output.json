@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://watson-airlines-api-mvp.146zmxftsk49.us-south.codeengine.appdomain.cloud",
+      "url": "https://watson-airport-swagger-test.146zmxftsk49.us-south.codeengine.appdomain.cloud",
       "description": "Watson API"
     }
   ],
@@ -31,7 +31,19 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Flight successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -54,7 +66,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Flight successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -77,7 +101,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Flight successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -90,7 +126,19 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Airport successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airport"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airport"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -113,7 +161,79 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Airport successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airport"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airport"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/airline/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Airline successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/airline/id/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Airline successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airline"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -127,155 +247,93 @@
       "Flight": {
         "type": "object",
         "properties": {
-          "type": {
+          "_id": {
             "type": "string",
-            "example": "object"
+            "example": "63e53b3d123da255099f26bc"
           },
-          "tags": {
-            "type": "array",
-            "example": [
-              "Flight"
-            ],
-            "items": {
-              "type": "string"
-            }
+          "AIRLINE": {
+            "type": "string",
+            "example": "US"
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "AIRLINE": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "FLIGHT_NUMBER": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "number"
-                  }
-                }
-              },
-              "ORIGIN_AIRPORT": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "DESTINATION_AIRPORT": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "CANCELLED": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "boolean"
-                  }
-                }
-              },
-              "DEPARTURE_DATE": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "date"
-                  }
-                }
-              },
-              "ARRIVAL_DATE": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "date"
-                  }
-                }
-              }
-            }
+          "FLIGHT_NUMBER": {
+            "type": "number",
+            "example": 840
+          },
+          "ORIGIN_AIRPORT": {
+            "type": "string",
+            "example": "SFO"
+          },
+          "DESTINATION_AIRPORT": {
+            "type": "string",
+            "example": "CLT"
+          },
+          "CANCELLED": {
+            "type": "boolean",
+            "example": true
+          },
+          "DEPARTURE_DATE": {
+            "type": "string",
+            "example": "2023-01-01T03:20:00.000Z"
+          },
+          "ARRIVAL_DATE": {
+            "type": "string",
+            "example": "2023-01-01T11:06:00.000Z"
           }
+        },
+        "xml": {
+          "name": "Flight"
         }
       },
-      "AIRPORT": {
+      "Airport": {
         "type": "object",
         "properties": {
-          "tags": {
-            "type": "array",
-            "example": [
-              "Airport"
-            ],
-            "items": {
-              "type": "string"
-            }
-          },
-          "type": {
+          "_id": {
             "type": "string",
-            "example": "object"
+            "example": "63dd87f9fd4b3618756969ce"
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "IATA_CODE": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "AIRPORT": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "CITY": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "STATE": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "COUNTRY": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              }
-            }
+          "IATA_CODE": {
+            "type": "string",
+            "example": "AMA"
+          },
+          "AIRPORT": {
+            "type": "string",
+            "example": "Rick Husband Amarillo International Airport"
+          },
+          "CITY": {
+            "type": "string",
+            "example": "Amarillo"
+          },
+          "STATE": {
+            "type": "string",
+            "example": "TX"
+          },
+          "COUNTRY": {
+            "type": "string",
+            "example": "USA"
           }
+        },
+        "xml": {
+          "name": "Airport"
+        }
+      },
+      "Airline": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "63dd87e1fd4b3618756969b3"
+          },
+          "IATA_CODE": {
+            "type": "string",
+            "example": "US"
+          },
+          "AIRLINE": {
+            "type": "string",
+            "example": "US Airways Inc."
+          }
+        },
+        "xml": {
+          "name": "Airline"
         }
       }
     }
