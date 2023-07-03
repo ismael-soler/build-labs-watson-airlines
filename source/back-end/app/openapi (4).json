@@ -142,7 +142,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Airport"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Airport"
+                  }
                 }
               },
               "application/xml": {
@@ -196,44 +199,6 @@
         }
       }
     },
-    "/airport/state/{state}": {
-      "get": {
-        "tags": [
-          "Airport"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "state",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Airport successfully obtained.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Airport"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Airport"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/airline/": {
       "get": {
         "tags": [
@@ -246,7 +211,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Airline"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Airline"
+                  }
                 }
               },
               "application/xml": {

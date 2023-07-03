@@ -5,7 +5,9 @@ exports.getAllFlights = async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Flight successfully obtained.',
             schema: { $ref: '#/components/schemas/Flight' }
-    } */
+        }
+       #swagger.tags = ['Flight']
+    */
   try {
     const flights = await Flights.find();
     res.status(200).json(flights);
@@ -19,7 +21,9 @@ exports.getFlightById = async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Flight successfully obtained.',
             schema: { $ref: '#/components/schemas/Flight' }
-    } */
+        }
+       #swagger.tags = ['Flight']
+    */
   try {
     const flight = await Flight.findById(req.params.id);
     res.status(200).json(flight);
@@ -38,7 +42,9 @@ exports.getFlightByNumber = async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Flight successfully obtained.',
             schema: { $ref: '#/components/schemas/Flight' }
-    } */
+        }
+       #swagger.tags = ['Flight']
+    */
     try {
         const flightNumber = req.params.flightNumber;
         const flight = await Flights.findOne({ FLIGHT_NUMBER: flightNumber });
@@ -53,7 +59,9 @@ exports.getFirstFlight = async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Flight successfully obtained.',
             schema: { $ref: '#/components/schemas/Flight' }
-    } */
+        }
+       #swagger.tags = ['Flight']
+    */
   try {
     const flight = await Flights.findOne();
     res.json(flight);

@@ -7,27 +7,6 @@ const mongo = require('./mongodbConnection');
 const FlightRouter = require('./routes/flightRouter');
 const AirportRouter = require('./routes/airportRouter');
 const AirlineRouter = require('./routes/airlineRouter');
-//swagger
-const swaggerUI = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerSpec = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "Watson Airlines Customer Experience",
-            version: "1.0.0",
-        },
-        servers: [
-            {
-                url: "http://localhost:3000"
-            }
-        ]
-    },
-    apis: [`${path.join(__dirname, "./routes/*.js")}`]
-};
-
-
-
 
 async function main() {
 
@@ -54,9 +33,6 @@ function startServer() {
     // middleware
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
-
-    // Swagger
-    app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
     // routes
     app.get('/', (req, res) => {
