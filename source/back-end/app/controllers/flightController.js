@@ -1,21 +1,5 @@
 const Flight = require('../models/flightModel');
 
-exports.getAllFlights = async (req, res) => {
-    /* #swagger.responses[200] = {
-            description: 'Flight successfully obtained.',
-            schema: { $ref: '#/components/schemas/Flight' }
-        }
-       #swagger.tags = ['Flight']
-    */
-  try {
-    const flights = await Flight.find();
-    res.status(200).json(flights);
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to retrieve flights' });
-  }
-};
-
-
 exports.getFlightById = async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Flight successfully obtained.',
@@ -71,9 +55,9 @@ exports.getFlightsByOriginAndDestinationAndDate = async (req, res) => {
     }
     #swagger.parameters['origin'] = { description: 'Origin IATA code', in: 'path', required: true, type: 'string' }
     #swagger.parameters['destination'] = { description: 'Destination IATA code', in: 'path', required: true, type: 'string' }
-    #swagger.parameters['day'] = { description: 'Day of the month', in: 'query', required: true, type: 'integer' }
-    #swagger.parameters['month'] = { description: 'Month of the year', in: 'query', required: true, type: 'integer' }
-    #swagger.parameters['year'] = { description: 'Year', in: 'query', required: true, type: 'integer' }
+    #swagger.parameters['day'] = { description: 'Day of the month', in: 'path', required: true, type: 'integer' }
+    #swagger.parameters['month'] = { description: 'Month of the year', in: 'path', required: true, type: 'integer' }
+    #swagger.parameters['year'] = { description: 'Year', in: 'path', required: true, type: 'integer' }
     #swagger.tags = ['Flight']
     */
     try {

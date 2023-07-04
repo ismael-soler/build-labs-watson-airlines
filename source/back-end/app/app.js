@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
-const mongo = require('./mongodbConnection');
+const mongo = require('./databaseConnection/mongodbConnection');
 // routers
 const FlightRouter = require('./routes/flightRouter');
 const AirportRouter = require('./routes/airportRouter');
@@ -14,7 +14,7 @@ async function main() {
     require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
     // Connect to mongodb
-    const { create_connection } = require('./mongodbConnection');
+    const { create_connection } = require('./databaseConnection/mongodbConnection');
     create_connection()
     .then((db) => {
         startServer();

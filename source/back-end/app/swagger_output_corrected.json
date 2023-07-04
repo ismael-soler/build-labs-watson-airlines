@@ -114,10 +114,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Flight"
-                  }
+                  "$ref": "#/components/schemas/Flight"
                 }
               },
               "application/xml": {
@@ -155,6 +152,84 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flights successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flight"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flight/find/{origin}/{destination}/{day}/{month}/{year}": {
+      "get": {
+        "tags": [
+          "Flight"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Origin IATA code"
+          },
+          {
+            "name": "destination",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Destination IATA code"
+          },
+          {
+            "name": "day",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Day of the month"
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Month of the year"
+          },
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Year"
           }
         ],
         "responses": {
