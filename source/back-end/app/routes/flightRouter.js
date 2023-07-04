@@ -5,6 +5,6 @@ const flightController = require('../controllers/flightController');
 router.get('/', flightController.getFirstFlight);
 router.get('/id/:id', flightController.getFlightById);
 router.get('/number/:flightNumber', flightController.getFlightByNumber);
-router.get('/find/:origin/:destination', flightController.getFlightsByOriginAndDestination);
+router.get('/find/:origin/:destination/:day/:month/:year', flightController.getFlightsByOriginAndDestinationAndDate);
 
 module.exports = router;

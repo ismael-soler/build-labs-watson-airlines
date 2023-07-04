@@ -64,24 +64,36 @@ exports.getFirstFlight = async (req, res) => {
   }
 };
 
-// find all flights by origin and destination IATA codes
-exports.getFlightsByOriginAndDestination = async (req, res) => {
+exports.getFlightsByOriginAndDestinationAndDate = async (req, res) => {
     /* #swagger.responses[200] = {
         description: 'Flights successfully obtained.',
         schema: { $ref: '#/components/schemas/Flight' }
     }
+    #swagger.parameters['origin'] = { description: 'Origin IATA code', in: 'path', required: true, type: 'string' }
+    #swagger.parameters['destination'] = { description: 'Destination IATA code', in: 'path', required: true, type: 'string' }
+    #swagger.parameters['day'] = { description: 'Day of the month', in: 'query', required: true, type: 'integer' }
+    #swagger.parameters['month'] = { description: 'Month of the year', in: 'query', required: true, type: 'integer' }
+    #swagger.parameters['year'] = { description: 'Year', in: 'query', required: true, type: 'integer' }
     #swagger.tags = ['Flight']
     */
     try {
-      const { origin, destination } = req.params;
-      const flights = await Flight.find({
-        ORIGIN_AIRPORT: origin,
-        DESTINATION_AIRPORT: destination
-      });
+        const origin = req.params.origin;
+        const destination = req.params.destination;
+        const day = req.params.day;
+        const month = req.params.month;
+        const year = req.params.year;
 
-      res.status(200).json(flights);
+        const startDate = new Date(year, month - 1, day, 0, 0, 0);
+        const endDate = new Date(year, month - 1, day, 23, 59, 59);
+
+        const flights = await Flight.find({
+            ORIGIN_AIRPORT: origin,
+            DESTINATION_AIRPORT: destination,
+            DEPARTURE_DATE: { $gte: startDate, $lte: endDate }
+        });
+        res.status(200).json(flights);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving flights' });
     }
-  };
+};

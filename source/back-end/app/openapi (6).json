@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://watson-assistant-api.146zmxftsk49.us-south.codeengine.appdomain.cloud",
+      "url": "https://watson-airlines-api.146zmxftsk49.us-south.codeengine.appdomain.cloud",
       "description": "Watson API"
     }
   ],
@@ -114,7 +114,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Flight"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
                 }
               },
               "application/xml": {
@@ -160,7 +163,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Flight"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
                 }
               },
               "application/xml": {
@@ -188,7 +194,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Airport"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Airport"
+                  }
                 }
               },
               "application/xml": {
@@ -264,7 +273,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Airport"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Airport"
+                  }
                 }
               },
               "application/xml": {
@@ -330,7 +342,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Airline"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Airline"
+                  }
                 }
               },
               "application/xml": {
@@ -416,10 +431,12 @@
           },
           "DEPARTURE_DATE": {
             "type": "string",
+            "format": "date-time",
             "example": "2023-01-01T03:20:00.000Z"
           },
           "ARRIVAL_DATE": {
             "type": "string",
+            "format": "date-time",
             "example": "2023-01-01T11:06:00.000Z"
           }
         },

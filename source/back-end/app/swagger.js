@@ -43,7 +43,7 @@ const general_specs = {
     //  description: 'Local server'
     // },
     {
-      url: 'https://watson-assistant-api.146zmxftsk49.us-south.codeengine.appdomain.cloud',
+      url: 'https://watson-airlines-api.146zmxftsk49.us-south.codeengine.appdomain.cloud',
       description: 'Watson API'
     }
   ],
